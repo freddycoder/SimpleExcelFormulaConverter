@@ -48,5 +48,19 @@ namespace UnitTestProject1
 
             result.ShouldBe("{!Date%yyyyMMdd%-3j!}120000+0000");
         }
+
+        [TestMethod]
+        public void Concatenate()
+        {
+            _converter.Convert("CONCATENATE(\"/\", TEXT(TODAY() - 5, \"AAAAMMJJ\"))")
+                .ShouldBe("/{!Date%yyyyMMdd%-5j!}");
+        }
+
+        [TestMethod]
+        public void MoreComplexeCase()
+        {
+            _converter.Convert("TEXT(TODAY()-30,\"aaaammjj\")&\"/\"&TEXT(TODAY(),\"aaaammjj\")")
+                .ShouldBe("{!Date%yyyyMMdd%-30j!}/{!Date%yyyyMMdd%!}");
+        }
     }
 }

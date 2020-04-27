@@ -164,5 +164,36 @@ namespace UnitTestProject1
             tree.ChildNodes[0].ShouldBeOfType<DateTimeFunction>();
             tree.ChildNodes[1].ShouldBeOfType<NumberNode>();
         }
+
+        [TestMethod]
+        public void Concatenate()
+        {
+            var parseur = new Parseur("CONCATENATE(\"/\", TEXT(TODAY() - 5, \"AAAAMMJJ\"))");
+
+            var tree = parseur.Parse();
+
+            tree.Token.ShouldBe(Token("string.Concat", TokenType.Function));
+
+            tree.ShouldBeOfType<StringConcatFunction>();
+        }
+
+        [TestMethod]
+        public void MoreComplexeCase()
+        {
+            var parseur = new Parseur("TEXT(TODAY()-30,\"aaaammjj\")&\"/\"&TEXT(TODAY(),\"aaaammjj\")");
+
+            var tree = parseur.Parse();
+
+            tree.ShouldBeOfType<StringConcatFunction>();
+
+            tree.ChildNodes.Count.ShouldBe(2);
+
+            tree.ChildNodes[0].ShouldBeOfType<StringConcatFunction>();
+            tree.ChildNodes[1].ShouldBeOfType<ToStringFunction>();
+
+            tree.ChildNodes[0].ChildNodes.Count.ShouldBe(2);
+            tree.ChildNodes[0].ChildNodes[0].ShouldBeOfType<ToStringFunction>();
+            tree.ChildNodes[0].ChildNodes[1].ShouldBeOfType<StringNode>();
+        }
     }
 }

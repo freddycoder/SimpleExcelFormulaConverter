@@ -34,10 +34,11 @@ namespace SimpleExcelFormulaConverter
     {
         public FunctionDictionary() : base(StringComparer.InvariantCultureIgnoreCase)
         {
-            Add("Aujourdhui", "DateTime.Now");
-            Add("Today",      "DateTime.Now");
-            Add("Texte",      "ToString");
-            Add("Text",       "ToString");
+            Add("Aujourdhui",  "DateTime.Now");
+            Add("Today",       "DateTime.Now");
+            Add("Texte",       "ToString");
+            Add("Text",        "ToString");
+            Add("CONCATENATE", "string.Concat");
         }
     }
 

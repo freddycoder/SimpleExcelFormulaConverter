@@ -388,5 +388,13 @@ namespace UnitTestProject1
             lexer.GetNextToken().ShouldBe(Token("-", TokenType.Operator));
             lexer.GetNextToken().ShouldBe(Token("2", TokenType.Number));
         }
+
+        [TestMethod]
+        public void Concatenate()
+        {
+            var lexer = new Lexer("CONCATENATE(\"/\", TEXT(TODAY() - 5, \"AAAAMMJJ\"))");
+
+            lexer.GetNextToken().ShouldBe(Token("string.Concat", TokenType.Function));
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace SimpleExcelFormulaConverter
                 ThrowUnexpectedTokenTypeException();
             }
 
-            if (CurrentToken.TokenType == TokenType.StringConcat)
+            while (CurrentToken.TokenType == TokenType.StringConcat)
             {
                 var token = CurrentToken;
 
@@ -132,6 +132,9 @@ namespace SimpleExcelFormulaConverter
                         break;
                     case "DateTime.Now":
                         ast = new DateTimeFunction(CurrentToken);
+                        break;
+                    case "string.Concat":
+                        ast = new StringConcatFunction(CurrentToken);
                         break;
                     default:
                         ThrowUnexpectedTokenTypeException();

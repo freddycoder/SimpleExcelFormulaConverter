@@ -86,10 +86,14 @@ namespace SimpleExcelFormulaConverter
         {
             switch (v)
             {
+                case 'A':
+                    return 'y';
                 case 'a':
                     return 'y';
                 case 'm':
                     return 'M';
+                case 'J':
+                    return 'd';
                 case 'j':
                     return 'd';
                 default:
