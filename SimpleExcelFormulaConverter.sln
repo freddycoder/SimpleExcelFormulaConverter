@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleExcelFormulaConverter", "SimpleExcelFormulaConverter\SimpleExcelFormulaConverter.csproj", "{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{CF07B173-5006-4638-8820-7BFC0B09CE40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF07B173-5006-4638-8820-7BFC0B09CE40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF07B173-5006-4638-8820-7BFC0B09CE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF07B173-5006-4638-8820-7BFC0B09CE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF07B173-5006-4638-8820-7BFC0B09CE40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB7282AF-CE2C-4E93-A9C0-CCCFF8909CD3}
+	EndGlobalSection
+EndGlobal
