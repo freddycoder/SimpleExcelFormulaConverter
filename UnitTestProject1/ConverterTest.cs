@@ -62,5 +62,19 @@ namespace UnitTestProject1
             _converter.Convert("TEXT(TODAY()-30,\"aaaammjj\")&\"/\"&TEXT(TODAY(),\"aaaammjj\")")
                 .ShouldBe("{!Date%yyyyMMdd%-30j!}/{!Date%yyyyMMdd%!}");
         }
+
+        [TestMethod]
+        public void MoreComplexeCase2()
+        {
+            _converter.Convert("TEXT(TODAY()-30,\"aaaammjj\")&\"/\"&TEXT(TODAY()+30,\"aaaammjj\")")
+                .ShouldBe("{!Date%yyyyMMdd%-30j!}/{!Date%yyyyMMdd%+30j!}");
+        }
+
+        [TestMethod]
+        public void ManyConcat()
+        {
+            _converter.Convert("\"/\"&\"/\"&\"/\"&\"/\"&\"/\"")
+                .ShouldBe("/////");
+        }
     }
 }

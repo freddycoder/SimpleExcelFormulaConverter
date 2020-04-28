@@ -30,7 +30,7 @@ namespace SimpleExcelFormulaConverter
             return ast;
         }
 
-        private AST Group18() // , ;
+        private AST Group18()
         {
             var ast = Group10();
 

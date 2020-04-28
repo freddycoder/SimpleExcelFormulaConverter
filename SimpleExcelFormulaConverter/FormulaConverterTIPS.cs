@@ -25,9 +25,13 @@ namespace SimpleExcelFormulaConverter
 
         private string GererEquationDate(string v)
         {
-            while (v.Contains("{!Date+") || v.Contains("{!Date-"))
+            while (v.Contains("{!Date+"))
             {
-                v = MoveText(v, "{!Date");
+                v = MoveText(v, "{!Date+");
+            }
+            while (v.Contains("{!Date-"))
+            {
+                v = MoveText(v, "{!Date-");
             }
 
             return v;
@@ -47,15 +51,15 @@ namespace SimpleExcelFormulaConverter
 
                 for(int i = 0; i < v.Length; i++)
                 {
-                    if (i < iCible + cible.Length)
+                    if (i < iCible + cible.Length - 1)
                     {
                         sb.Append(v[i]);
                     }
-                    else if (i >= iCible + cible.Length && v[i] != '!' && v[i] != '%' && equationPartIsParsed == false)
+                    else if (i >= iCible + cible.Length - 1 && v[i] != '!' && v[i] != '%' && equationPartIsParsed == false)
                     {
                         equationPart.Append(v[i]);
                     }
-                    else if (i >= iCible + cible.Length && v[i] != '!' && formatPartIsParse == false)
+                    else if (i >= iCible + cible.Length - 1 && v[i] != '!' && formatPartIsParse == false)
                     {
                         equationPartIsParsed = true;
                         formatPart.Append(SwitchDateFormatCaractere(v[i]));
