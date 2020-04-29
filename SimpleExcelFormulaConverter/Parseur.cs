@@ -9,25 +9,20 @@ namespace SimpleExcelFormulaConverter
 {
     public class Parseur
     {
-        private readonly Lexer _lexer;
+        private Lexer _lexer;
         private Token CurrentToken { get; set; }
 
-        public Parseur(string formule)
+        public AST Parse(string formule)
         {
             _lexer = new Lexer(formule);
             CurrentToken = _lexer.GetNextToken();
-        }
-
-        public AST Parse()
-        {
-            AST ast = null;
 
             if (CurrentToken.TokenType != TokenType.EndOfText)
             {
-                ast = Group18();
+                return Group18();
             }
 
-            return ast;
+            return null;
         }
 
         private AST Group18()

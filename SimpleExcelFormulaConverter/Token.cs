@@ -30,15 +30,18 @@ namespace SimpleExcelFormulaConverter
         Operator
     }
 
-    public class FunctionDictionary : Dictionary<string, string>
+    public static class Functions
     {
-        public FunctionDictionary() : base(StringComparer.InvariantCultureIgnoreCase)
+        public static Dictionary<string, string> Dictionnary;
+
+        static Functions()
         {
-            Add("Aujourdhui",  "DateTime.Now");
-            Add("Today",       "DateTime.Now");
-            Add("Texte",       "ToString");
-            Add("Text",        "ToString");
-            Add("CONCATENATE", "string.Concat");
+            Dictionnary = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            Dictionnary.Add("Aujourdhui",  "DateTime.Now");
+            Dictionnary.Add("Today",       "DateTime.Now");
+            Dictionnary.Add("Texte",       "ToString");
+            Dictionnary.Add("Text",        "ToString");
+            Dictionnary.Add("CONCATENATE", "string.Concat");
         }
     }
 

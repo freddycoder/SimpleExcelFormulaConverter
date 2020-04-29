@@ -14,7 +14,7 @@ namespace SimpleExcelFormulaConverter
 
         public Lexer(string text)
         {
-            _functionsDictionary = new FunctionDictionary();
+            _functionsDictionary = Functions.Dictionnary;
             _text = text;
             _pos = 0;
         }
@@ -63,9 +63,9 @@ namespace SimpleExcelFormulaConverter
                     sb.Append(CurrentChar);
                     _pos++;
                 }
-                if (_functionsDictionary.ContainsKey(sb.ToString()))
+                var functionName = sb.ToString();
+                if (_functionsDictionary.TryGetValue(functionName, out var newName))
                 {
-                    var newName = _functionsDictionary[sb.ToString()];
                     sb.Clear();
                     sb.Append(newName);
                 }

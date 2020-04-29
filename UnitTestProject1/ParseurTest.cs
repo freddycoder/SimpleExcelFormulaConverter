@@ -9,14 +9,19 @@ namespace UnitTestProject1
     [TestClass]
     public class ParseurTest
     {
+        private readonly Parseur _parseur;
+
+        public ParseurTest()
+        {
+            _parseur = new Parseur();
+        }
+
         [TestMethod]
         public void BuildParseur()
         {
-            var parseur = new Parseur("10");
+            _parseur.ShouldNotBeNull();
 
-            parseur.ShouldNotBeNull();
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("10");
 
             tree.ShouldBeOfType<NumberNode>();
 
@@ -26,9 +31,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseStringConcat()
         {
-            var parseur = new Parseur("\"a\"&\"b\"");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("\"a\"&\"b\"");
 
             tree.ChildNodes.Count.ShouldBe(2);
 
@@ -40,9 +43,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseFunctionNoArguments()
         {
-            var parseur = new Parseur("Today()");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("Today()");
 
             tree.ChildNodes.Count.ShouldBe(0);
 
@@ -52,9 +53,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseFunctionWithOneArguments()
         {
-            var parseur = new Parseur("Text(Today())");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("Text(Today())");
 
             tree.ChildNodes.Count.ShouldBe(1);
             tree.Token.ShouldBe(Token("ToString", TokenType.Function));
@@ -66,9 +65,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseFunctionWithTowArguments()
         {
-            var parseur = new Parseur("Text(Today(), \"yyyyMMdd\")");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("Text(Today(), \"yyyyMMdd\")");
 
             tree.ChildNodes.Count.ShouldBe(2);
             tree.Token.ShouldBe(Token("ToString", TokenType.Function));
@@ -83,9 +80,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseOneOfTargetFormula()
         {
-            var parseur = new Parseur("Text(Today(), \"yyyyMMdd\")&\"120000+0000\"");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("Text(Today(), \"yyyyMMdd\")&\"120000+0000\"");
 
             tree.ChildNodes.Count.ShouldBe(2);
             tree.Token.ShouldBe(Token("string.Concat", TokenType.StringConcat));
@@ -104,9 +99,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseTodayMinusSomeDays()
         {
-            var parseur = new Parseur("Today()-3");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("Today()-3");
 
             tree.ChildNodes.Count.ShouldBe(2);
             tree.Token.ShouldBe(Token("-", TokenType.Operator));
@@ -118,9 +111,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseTodayPlusSomeDays()
         {
-            var parseur = new Parseur("Today()+3");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("Today()+3");
 
             tree.ChildNodes.Count.ShouldBe(2);
             tree.Token.ShouldBe(Token("+", TokenType.Operator));
@@ -132,9 +123,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseUnaryMinus()
         {
-            var parseur = new Parseur("-3");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("-3");
 
             tree.ChildNodes.Count.ShouldBe(1);
             tree.Token.ShouldBe(Token("-", TokenType.Operator));
@@ -144,9 +133,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ParseMoreComplexeDateFormula()
         {
-            var parseur = new Parseur("TEXT(TODAY()-3,\"aaaammjj\")&\"120000+0000");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("TEXT(TODAY()-3,\"aaaammjj\")&\"120000+0000");
 
             tree.ShouldBeOfType<StringConcatFunction>();
             tree.ChildNodes.Count.ShouldBe(2);
@@ -168,9 +155,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Concatenate()
         {
-            var parseur = new Parseur("CONCATENATE(\"/\", TEXT(TODAY() - 5, \"AAAAMMJJ\"))");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("CONCATENATE(\"/\", TEXT(TODAY() - 5, \"AAAAMMJJ\"))");
 
             tree.Token.ShouldBe(Token("string.Concat", TokenType.Function));
 
@@ -180,9 +165,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void MoreComplexeCase()
         {
-            var parseur = new Parseur("TEXT(TODAY()-30,\"aaaammjj\")&\"/\"&TEXT(TODAY(),\"aaaammjj\")");
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse("TEXT(TODAY()-30,\"aaaammjj\")&\"/\"&TEXT(TODAY(),\"aaaammjj\")");
 
             tree.ShouldBeOfType<StringConcatFunction>();
 

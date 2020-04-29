@@ -14,11 +14,16 @@ namespace SimpleExcelFormulaConverter
 
     public class FormulaConverterTIPS : IFormulaConverter
     {
+        private readonly Parseur _parseur;
+
+        public FormulaConverterTIPS()
+        {
+            _parseur = new Parseur();
+        }
+
         public string Convert(string formula)
         {
-            var parseur = new Parseur(formula);
-
-            var tree = parseur.Parse();
+            var tree = _parseur.Parse(formula);
 
             return GererEquationDate(tree.ToString());
         }

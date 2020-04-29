@@ -76,5 +76,12 @@ namespace UnitTestProject1
             _converter.Convert("\"/\"&\"/\"&\"/\"&\"/\"&\"/\"")
                 .ShouldBe("/////");
         }
+
+        [TestMethod]
+        public void TextToday()
+        {
+            _converter.Convert("TEXT(TODAY())")
+                .ShouldBe("{!Date!}");
+        }
     }
 }
