@@ -64,7 +64,8 @@ namespace SimpleExcelFormulaConverter
                     _pos++;
                 }
                 var functionName = sb.ToString();
-                if (_functionsDictionary.TryGetValue(functionName, out var newName))
+                var newName = "";
+                if (_functionsDictionary.TryGetValue(functionName, out newName))
                 {
                     sb.Clear();
                     sb.Append(newName);

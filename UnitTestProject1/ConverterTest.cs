@@ -20,6 +20,13 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
+        public void EmptyString()
+        {
+            _converter.Convert("")
+                .ShouldBe("");
+        }
+
+        [TestMethod]
         public void ConvertDate()
         {
             var excelFormula = "TEXT(TODAY(),\"aaaammjj\")&\"120000+0000";
@@ -82,6 +89,13 @@ namespace UnitTestProject1
         {
             _converter.Convert("TEXT(TODAY())")
                 .ShouldBe("{!Date!}");
+        }
+
+        [TestMethod]
+        public void MoisDecaler()
+        {
+            _converter.Convert("TEXT(EDATE(TODAY()+3,-36),\"aaaammjj\")&\"050000+0000\"")
+                .ShouldBe("{!Date%yyyyMMdd%+3j-36M!}050000+0000");
         }
     }
 }

@@ -25,6 +25,8 @@ namespace SimpleExcelFormulaConverter
         {
             var tree = _parseur.Parse(formula);
 
+            if (tree == null) return "";
+
             return GererEquationDate(tree.ToString());
         }
 
