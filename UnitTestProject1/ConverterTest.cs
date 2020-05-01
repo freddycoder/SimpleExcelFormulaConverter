@@ -95,7 +95,21 @@ namespace UnitTestProject1
         public void MoisDecaler()
         {
             _converter.Convert("TEXT(EDATE(TODAY()+3,-36),\"aaaammjj\")&\"050000+0000\"")
-                .ShouldBe("{!Date%yyyyMMdd%+3j-36M!}050000+0000");
+                .ShouldBe("{!Date%yyyyMMdd%+3j-36mois!}050000+0000");
+        }
+
+        [TestMethod]
+        public void MoisDecaler2()
+        {
+            _converter.Convert("TEXT(EDATE(TODAY(),+12),\"aaaammjj\")&\"050000+0000\"")
+                .ShouldBe("{!Date%yyyyMMdd%+12mois!}050000+0000");
+        }
+
+        [TestMethod]
+        public void MoisDecaler3()
+        {
+            _converter.Convert("TEXT(EDATE(TODAY(),12),\"aaaammjj\")&\"050000+0000\"")
+                .ShouldBe("{!Date%yyyyMMdd%+12mois!}050000+0000");
         }
     }
 }

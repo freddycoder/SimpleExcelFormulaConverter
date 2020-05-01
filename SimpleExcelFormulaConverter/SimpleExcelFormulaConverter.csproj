@@ -48,6 +48,7 @@
     <Compile Include="AST.cs" />
     <Compile Include="FormulaConverterTIPS.cs" />
     <Compile Include="Lexer.cs" />
+    <Compile Include="Nodes\AddMonths.cs" />
     <Compile Include="Nodes\DateTimeFunction.cs" />
     <Compile Include="Nodes\NumberNode.cs" />
     <Compile Include="Nodes\OperatorNode.cs" />

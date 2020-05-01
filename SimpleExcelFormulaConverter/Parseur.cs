@@ -131,6 +131,9 @@ namespace SimpleExcelFormulaConverter
                     case "string.Concat":
                         ast = new StringConcatFunction(CurrentToken);
                         break;
+                    case "AddMonths":
+                        ast = new AddMonths(CurrentToken);
+                        break;
                     default:
                         ThrowUnexpectedTokenTypeException();
                         break;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 using SimpleExcelFormulaConverter;
+using System;
 using static SimpleExcelFormulaConverter.TokenBuilder;
 
 namespace UnitTestProject1
@@ -395,6 +396,18 @@ namespace UnitTestProject1
             var lexer = new Lexer("CONCATENATE(\"/\", TEXT(TODAY() - 5, \"AAAAMMJJ\"))");
 
             lexer.GetNextToken().ShouldBe(Token("string.Concat", TokenType.Function));
+        }
+
+        [TestMethod]
+        public void GetEDATEToken()
+        {
+            var lexer = new Lexer("TEXT(EDATE(TODAY()+3,-36),\"aaaammjj\")&\"050000+0000\"");
+
+            lexer.GetNextToken().ShouldBe(Token("ToString", TokenType.Function));
+
+            lexer.GetNextToken().ShouldBe(Token("(", TokenType.OpenParenthesis));
+
+            lexer.GetNextToken().ShouldBe(Token("AddMonths", TokenType.Function));
         }
     }
 }

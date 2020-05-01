@@ -42,6 +42,7 @@ namespace SimpleExcelFormulaConverter
             Dictionnary.Add("Texte",       "ToString");
             Dictionnary.Add("Text",        "ToString");
             Dictionnary.Add("CONCATENATE", "string.Concat");
+            Dictionnary.Add("EDATE",       "AddMonths");
         }
     }
 
