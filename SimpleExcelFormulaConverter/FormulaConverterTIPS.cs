@@ -32,11 +32,11 @@ namespace SimpleExcelFormulaConverter
 
         private string GererEquationDate(string v)
         {
-            while (v.Contains("{!Date+"))
+            while (v.Contains("{!Date+") && v.Contains("%"))
             {
                 v = MoveText(v, "{!Date+");
             }
-            while (v.Contains("{!Date-"))
+            while (v.Contains("{!Date-") && v.Contains("%"))
             {
                 v = MoveText(v, "{!Date-");
             }
@@ -58,15 +58,15 @@ namespace SimpleExcelFormulaConverter
 
                 for(int i = 0; i < v.Length; i++)
                 {
-                    if (i < iCible + cible.Length - 1)
+                    if (i < iCible + cible.Length - 1) // On récupère le début de la formule
                     {
                         sb.Append(v[i]);
                     }
-                    else if (i >= iCible + cible.Length - 1 && v[i] != '!' && v[i] != '%' && equationPartIsParsed == false)
+                    else if (i >= iCible + cible.Length - 1 && v[i] != '!' && v[i] != '%' && equationPartIsParsed == false) // On récupère l'equation
                     {
                         equationPart.Append(v[i]);
                     }
-                    else if (i >= iCible + cible.Length - 1 && v[i] != '!' && formatPartIsParse == false)
+                    else if (i >= iCible + cible.Length - 1 && v[i] != '!' && formatPartIsParse == false) // On récupère le format
                     {
                         equationPartIsParsed = true;
                         formatPart.Append(SwitchDateFormatCaractere(v[i]));
@@ -78,7 +78,7 @@ namespace SimpleExcelFormulaConverter
                             sb.Append(equationPart.ToString());
                         }
                     }
-                    else
+                    else // 
                     {
                         formatPartIsParse = true;
                         equationPartIsParsed = true;

@@ -1,9 +1,4 @@
 ﻿using SimpleExcelFormulaConverter.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleExcelFormulaConverter
 {
@@ -19,17 +14,17 @@ namespace SimpleExcelFormulaConverter
 
             if (CurrentToken.TokenType != TokenType.EndOfText)
             {
-                return Group18();
+                var tree = Group10();
+
+                if (CurrentToken.TokenType != TokenType.EndOfText)
+                {
+                    ThrowUnexpectedTokenTypeException();
+                }
+
+                return tree;
             }
 
             return null;
-        }
-
-        private AST Group18()
-        {
-            var ast = Group10();
-
-            return ast;
         }
 
         private AST Group10()
@@ -64,12 +59,12 @@ namespace SimpleExcelFormulaConverter
                     case "+":
                         var token = CurrentToken;
                         CurrentToken = _lexer.GetNextToken();
-                        ast = new OperatorNode(ast, token, Group5());
+                        ast = new OperatorNode(ast, token, Group6());
                         break;
                     case "-":
                         token = CurrentToken;
                         CurrentToken = _lexer.GetNextToken();
-                        ast = new OperatorNode(ast, token, Group5());
+                        ast = new OperatorNode(ast, token, Group6());
                         break;
                     default:
                         ThrowUnexpectedTokenTypeException();
@@ -101,12 +96,17 @@ namespace SimpleExcelFormulaConverter
             if (ast == null)
             {
                 if (CurrentToken.TokenType == TokenType.Operator &&
-                    CurrentToken.Value == "-")
+                    (CurrentToken.Value == "-" || CurrentToken.Value == "+"))
                 {
                     var token = CurrentToken;
                     CurrentToken = _lexer.GetNextToken();
                     ast = new OperatorNode(Group3(), token);
                 }
+            }
+            else if (ast is DateTimeFunction && CurrentToken.TokenType == TokenType.Operator &&
+                     (CurrentToken.Value == "-" || CurrentToken.Value == "+")) 
+            {
+                ast = new DateTimeExpression(ast, Token.Expression, Group6());
             }
 
             return ast;

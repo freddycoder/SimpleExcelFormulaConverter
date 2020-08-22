@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleExcelFormulaConverter.Nodes
 {
-    public class NumberNode : AST
+    public class NumberNode : AST, IEvaluable
     {
         public NumberNode(Token token) : base(token)
         {
@@ -14,6 +14,11 @@ namespace SimpleExcelFormulaConverter.Nodes
 
         public NumberNode(AST leftNode, Token token, AST rightNode) : base(leftNode, token, rightNode)
         {
+        }
+
+        public int Eval()
+        {
+            return int.Parse(Value);
         }
 
         public override string ToString()

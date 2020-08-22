@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 using SimpleExcelFormulaConverter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTestProject1
 {
@@ -110,6 +105,48 @@ namespace UnitTestProject1
         {
             _converter.Convert("TEXT(EDATE(TODAY(),12),\"aaaammjj\")&\"050000+0000\"")
                 .ShouldBe("{!Date%yyyyMMdd%+12mois!}050000+0000");
+        }
+
+        [TestMethod]
+        public void OperationMathematiqueSurLesJours()
+        {
+            _converter.Convert("TEXT(TODAY()-30+1,\"aaaammjj\")&\"050000+0000\"")
+                .ShouldBe("{!Date%yyyyMMdd%-29j!}050000+0000");
+        }
+
+        [TestMethod]
+        public void OperationMathematiqueSurLesJours2()
+        {
+            _converter.Convert("TEXT(TODAY()+30+1,\"aaaammjj\")&\"050000+0000\"")
+                .ShouldBe("{!Date%yyyyMMdd%+31j!}050000+0000");
+        }
+
+        [TestMethod]
+        public void OperationMathematiqueSurLesJours3()
+        {
+            _converter.Convert("TEXT(TODAY()-30+1, \"aaaammjj\")")
+                .ShouldBe("{!Date%yyyyMMdd%-29j!}");
+        }
+
+        [TestMethod]
+        public void OperationMathematiqueSurLesJours4()
+        {
+            _converter.Convert("TODAY()-30+1")
+                .ShouldBe("Date-29j");
+        }
+
+        [TestMethod]
+        public void OperationMathematiqueSurLesJours5()
+        {
+            _converter.Convert("TEXT(TODAY()-30+1)")
+                .ShouldBe("{!Date-29j!}");
+        }
+
+        [TestMethod]
+        public void OperationMathematiqueSurLesJours6()
+        {
+            _converter.Convert("TEXT(TODAY()+30+1)")
+                .ShouldBe("{!Date+31j!}");
         }
     }
 }

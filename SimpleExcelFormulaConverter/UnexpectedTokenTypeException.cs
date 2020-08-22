@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace SimpleExcelFormulaConverter
 {
     [Serializable]
-    internal class UnexpectedTokenTypeException : Exception
+    public class UnexpectedTokenTypeException : Exception
     {
         public UnexpectedTokenTypeException()
         {

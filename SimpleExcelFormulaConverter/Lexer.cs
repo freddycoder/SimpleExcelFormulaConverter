@@ -14,7 +14,7 @@ namespace SimpleExcelFormulaConverter
 
         public Lexer(string text)
         {
-            _functionsDictionary = Functions.Dictionnary;
+            _functionsDictionary = Functions.Dictionary;
             _text = text;
             _pos = 0;
         }

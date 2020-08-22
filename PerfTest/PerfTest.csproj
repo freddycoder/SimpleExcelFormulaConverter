@@ -4,20 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleExcelFormulaConverter</RootNamespace>
-    <AssemblyName>SimpleExcelFormulaConverter</AssemblyName>
+    <ProjectGuid>{86B836CA-D8F0-4F9B-8922-F5162AFAB881}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PerfTest</RootNamespace>
+    <AssemblyName>PerfTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,22 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AST.cs" />
-    <Compile Include="FormulaConverterTIPS.cs" />
-    <Compile Include="Nodes\IEvaluable.cs" />
-    <Compile Include="Lexer.cs" />
-    <Compile Include="Nodes\AddMonths.cs" />
-    <Compile Include="Nodes\DateTimeExpression.cs" />
-    <Compile Include="Nodes\DateTimeFunction.cs" />
-    <Compile Include="Nodes\NumberNode.cs" />
-    <Compile Include="Nodes\OperatorNode.cs" />
-    <Compile Include="Nodes\StringConcatFunction.cs" />
-    <Compile Include="Nodes\StringNode.cs" />
-    <Compile Include="Nodes\ToStringFunction.cs" />
-    <Compile Include="Parseur.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Token.cs" />
-    <Compile Include="UnexpectedTokenTypeException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleExcelFormulaConverter\SimpleExcelFormulaConverter.csproj">
+      <Project>{66F8B0CE-BC5F-41AA-8FF1-ED35C14EB14E}</Project>
+      <Name>SimpleExcelFormulaConverter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
