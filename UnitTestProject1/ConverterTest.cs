@@ -148,5 +148,12 @@ namespace UnitTestProject1
             _converter.Convert("TEXT(TODAY()+30+1)")
                 .ShouldBe("{!Date+31j!}");
         }
+
+        [TestMethod]
+        public void MoisDecalerEtOperationSurJour()
+        {
+            _converter.Convert("TEXT(EDATE(TODAY()-50+30,12+12),\"aaaammjj\")&\"050000+0000\"")
+                .ShouldBe("{!Date%yyyyMMdd%-20j+24mois!}050000+0000");
+        }
     }
 }
