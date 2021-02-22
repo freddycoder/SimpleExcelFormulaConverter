@@ -1,10 +1,10 @@
 # SimpleExcelFormulaConverter
 
-# Goal
+## Goal
 
 The goal of this project is to convert a subset of excel formula into a specific format.
 
-# Example
+## Example
 
 Suppose you have a excel formula like this :
 ```
