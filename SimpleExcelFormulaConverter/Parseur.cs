@@ -103,7 +103,7 @@ namespace SimpleExcelFormulaConverter
                     ast = new OperatorNode(Group3(), token);
                 }
             }
-            else if (ast is DateTimeFunction && CurrentToken.TokenType == TokenType.Operator &&
+            else if ((ast is DateTimeFunction || ast is AddMonths) && CurrentToken.TokenType == TokenType.Operator &&
                      (CurrentToken.Value == "-" || CurrentToken.Value == "+")) 
             {
                 ast = new DateTimeExpression(ast, Token.Expression, Group6());
